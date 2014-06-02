@@ -1,0 +1,35 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix ex: <http://example.com/ns#> .
+@prefix emp: <http://example.com/emp#> .
+@prefix dept: <http://example.com/dept#> .
+@prefix likes: <http://example.com/likes#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@base <http://mappingpedia.org/rdb2rdf/r2rml/tc/> .
+
+<TriplesMap2> a rr:TripdlesMap;
+  rr:logicalTable [rr:tableName "fieldsite"];
+  rr:subjectMap [rr:template "http://swissex.ch/data/id/Fieldsite/{Deployment}";
+                 rr:class ex:Fieldsite];
+  rr:predicateObjectMap [rr:predicateMap [rr:constant ex:description];
+                         rr:objectMap [rr:column "Description"; rr:datatype xsd:string ]];
+  rr:predicateObjectMap [rr:predicateMap [rr:constant ex:organization];
+                         rr:objectMap [rr:column "Organization"; rr:datatype xsd:string ]];
+.
+
+<TriplesMap3> a rr:TriplesMap;
+  rr:logicalTable [rr:tableName "recordfield"];
+  rr:subjectMap [rr:template "http://swissex.ch/data/id/stream/{Location}/{DBaseParameterName}";
+                 rr:class ex:Field];
+  rr:predicateObjectMap [rr:predicateMap [rr:constant ex:name];
+                         rr:objectMap [rr:column "DBaseParameterName" ]];
+  rr:predicateObjectMap [rr:predicateMap [rr:constant ex:property];
+                         rr:objectMap [rr:column "MeasuredParameter"; ]];
+.
+
+<TriplesMap4> a rr:TriplesMap;
+  rr:logicalTable [rr:tableName "recordfield"];
+  rr:subjectMap [rr:template "http://swissex.ch/data/id/stream/{Location}";
+                 rr:class ex:Stream];
+  rr:predicateObjectMap [rr:predicateMap [rr:constant ex:field];
+                         rr:objectMap [rr:template "http://swissex.ch/data/id/stream/{Location}/{DBaseParameterName}" ]];
+.
